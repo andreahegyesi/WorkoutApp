@@ -28,11 +28,11 @@
       <div class="col-lg-6">
         <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3"><%=exercise.getName() %></h1>
         <p class="lead"><%=exercise.getDescription() %></p>
-        <h3><div class="d-grid gap-2 d-md-flex justify-content-md-start">
+        <h2><div class="d-grid gap-2 d-md-flex justify-content-md-start">
            <div class="d-flex gap-2 py-5">
                  <span class="badge text-bg-primary rounded-pill"><p class="card-text"><%= exercise.getCategory().getName() %></p></span>
             </div>
-        </div> </h3>
+        </div> </h2>
       </div>
     </div>
   </div>
