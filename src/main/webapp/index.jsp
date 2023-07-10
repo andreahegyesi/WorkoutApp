@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="java.util.*" %>
-<%@ page import="com.repository.JpaExerciseRepository" %>
+<%@ page import="com.repository.JpaWgerExerciseRepository" %>
 <%@ page import="com.repository.WgerApiReader" %>
 <%@ page import="com.model.WgerExercise" %>
 <html>
@@ -30,10 +30,10 @@
                 <a class="nav-link" aria-current="page" href="showExerciseCards.jsp">Exercises</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">My Exercises</a>
+                <a class="nav-link" href="showMyExercises.jsp">My Exercises</a>
               </li>
     		  <li class="nav-item">
-                <a class="nav-link" href="#">Workouts</a>
+                <a class="nav-link" href="showMyWorkouts.jsp">Workouts</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">More</a>
@@ -80,7 +80,7 @@
         if (request.getParameter("syncExerciseLibrary") != null) {
             WgerApiReader wgerApiReader = new WgerApiReader();
             ArrayList<WgerExercise> generatedExercises = wgerApiReader.getExercisesFromWGER();
-            JpaExerciseRepository exerciseRepo = new JpaExerciseRepository();
+            JpaWgerExerciseRepository exerciseRepo = new JpaWgerExerciseRepository();
             exerciseRepo.addExercise(generatedExercises);
 
     %>

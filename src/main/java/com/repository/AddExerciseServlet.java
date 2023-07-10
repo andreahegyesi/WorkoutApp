@@ -10,7 +10,7 @@ import java.io.IOException;
 public class AddExerciseServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        JpaExerciseRepository repository = new JpaExerciseRepository();
+        JpaWgerExerciseRepository repository = new JpaWgerExerciseRepository();
         String name = req.getParameter("name");
         WgerExercise wgerExercise = new WgerExercise(name);
         repository.addExercise(wgerExercise);

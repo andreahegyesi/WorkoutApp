@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
-public class JpaExerciseRepository {
+public class JpaWgerExerciseRepository {
     EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Hibernate_JPA");
     EntityManager entityManager = emFactory.createEntityManager();
 
@@ -45,19 +45,19 @@ public class JpaExerciseRepository {
     }
 
 
-    /*public List<Student> findStudentByName(String findName) {
+    /* public List<Student> findStudentByName(String findName) {
         //TypedQuery<Student> typedQuery = entityManager.createQuery(("select s from Student s WHERE s.name = '" + findName + "'"), Student.class);
         TypedQuery<Student> typedQuery = entityManager.createQuery(("select s from Student s WHERE s.name LIKE '%" + findName + "%'"), Student.class);
         List<Student> studentListByNames = typedQuery.getResultList();
         entityManager.close();
         emFactory.close();
         return studentListByNames;
-    }
-    public Student findStudentById(int findId) {
-        Student student = entityManager.find(Student.class, findId);
+    } */
+    public WgerExercise findWgerExerciseById(int findId) {
+        WgerExercise wgerExercise = entityManager.find(WgerExercise.class, findId);
         entityManager.close();
         emFactory.close();
-        return student;
-    } */
+        return wgerExercise;
+    }
 
 }

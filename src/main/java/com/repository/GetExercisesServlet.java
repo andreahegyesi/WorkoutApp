@@ -11,7 +11,7 @@ import java.util.List;
 public class GetExercisesServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        JpaExerciseRepository repository = new JpaExerciseRepository();
+        JpaWgerExerciseRepository repository = new JpaWgerExerciseRepository();
         List<WgerExercise> wgerExercises = repository.getAllExercises();
         resp.setContentType("text/html");
         resp.getWriter().println("<html>");

@@ -1,7 +1,7 @@
 package com.controller;
 
 import com.google.gson.Gson;
-import com.repository.JpaExerciseRepository;
+import com.repository.JpaWgerExerciseRepository;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,7 +14,7 @@ import java.io.PrintWriter;
 public class ExerciseApiServlet extends HttpServlet {
 
     private final Gson gson = new Gson();
-    private final JpaExerciseRepository exerciseRepository = new JpaExerciseRepository();
+    private final JpaWgerExerciseRepository exerciseRepository = new JpaWgerExerciseRepository();
     @Override
     protected void doGet(
             HttpServletRequest request,

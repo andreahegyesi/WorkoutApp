@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="java.util.*" %>
-<%@ page import="com.repository.JpaExerciseRepository" %>
+<%@ page import="com.repository.JpaWgerExerciseRepository" %>
 <%@ page import="com.repository.WgerApiReader" %>
 <%@ page import="com.model.WgerExercise" %>
 <html>
@@ -29,10 +29,10 @@
                 <a class="nav-link active" aria-current="page" href="showExercises.jsp">Exercises</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">My Exercises</a>
+                <a class="nav-link" href="showMyExercises.jsp">My Exercises</a>
               </li>
     		  <li class="nav-item">
-                <a class="nav-link" href="#">Workouts</a>
+                <a class="nav-link" href="showMyWorkouts.jsp">Workouts</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">More</a>
@@ -52,7 +52,7 @@
         <div class="container">
 
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-  <% JpaExerciseRepository repository = new JpaExerciseRepository();
+  <% JpaWgerExerciseRepository repository = new JpaWgerExerciseRepository();
       List<WgerExercise> exercises = repository.getAllExercises();
        if(exercises != null){
                for (WgerExercise exercise : exercises) { %>
@@ -62,10 +62,12 @@
                                       <img class="card-img-top" src="/WorkoutApp/images/dumbbell.svg" alt="Card image cap">
                                       <div class="card-body">
                                       <h5 class="card-title"><%= exercise.getName() %></h5>
-                                        <p class="card-text"><%= exercise.getCategory().getName() %></p>
+                                      <div class="d-flex gap-2 py-5">
+                                      <span class="badge text-bg-primary rounded-pill"><p class="card-text"><%= exercise.getCategory().getName() %></p></span>
+                                       </div>
                                         <div class="d-flex justify-content-between align-items-center">
                                           <div class="btn-group">
-                                            <a  href="viewExercise.jsp" >
+                                            <a  href=<%= "viewExercise.jsp?id=" + exercise.getId() %>>
                                                 <button type="submit" class="btn btn-sm btn-outline-secondary">View</button>
                                             </a>
                                             <button type="button" class="btn btn-sm btn-outline-secondary">Add to My Exercises</button>

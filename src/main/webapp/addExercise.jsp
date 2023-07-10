@@ -1,6 +1,6 @@
 
-<%@ page import="com.model.Exercise" %>
-<%@ page import="com.repository.JpaExerciseRepository" %>
+<%@ page import="com.model.WgerExercise" %>
+<%@ page import="com.repository.JpaWgerExerciseRepository" %>
 
 <%
   String name = request.getParameter("name");
