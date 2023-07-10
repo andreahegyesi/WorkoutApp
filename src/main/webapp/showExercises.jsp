@@ -1,8 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="java.util.*" %>
 <%@ page import="com.repository.JpaExerciseRepository" %>
-<%@ page import="com.repository.ExerciseToDatabase" %>
-<%@ page import="com.model.Exercise" %>
+<%@ page import="com.repository.WgerApiReader" %>
+<%@ page import="com.model.WgerExercise" %>
 <html>
  <head>
      <meta charset="utf-8">
@@ -51,9 +51,9 @@
             <th>Category</th>
         </tr>
   <% JpaExerciseRepository repository = new JpaExerciseRepository();
-      List<Exercise> exercises = repository.getAllExercises();
+      List<WgerExercise> exercises = repository.getAllExercises();
        if(exercises != null){
-               for (Exercise exercise : exercises) { %>
+               for (WgerExercise exercise : exercises) { %>
                           <tr>
                               <td><%= exercise.getId() %></td>
                               <td><%= exercise.getName() %></td>

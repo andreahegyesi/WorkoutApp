@@ -1,8 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="java.util.*" %>
 <%@ page import="com.repository.JpaExerciseRepository" %>
-<%@ page import="com.repository.ExerciseToDatabase" %>
-<%@ page import="com.model.Exercise" %>
+<%@ page import="com.repository.WgerApiReader" %>
+<%@ page import="com.model.WgerExercise" %>
 <html>
 
  <head>
@@ -28,6 +28,9 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="showExerciseCards.jsp">Exercises</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">My Exercises</a>
               </li>
     		  <li class="nav-item">
                 <a class="nav-link" href="#">Workouts</a>
@@ -73,17 +76,10 @@
    </main>
    <script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
-      <h2>Sync exercise library </h2>
-
-    <form action="" method="POST">
-        <br/>
-        <input type="submit" name="syncExerciseLibrary" value="Read exercise from WGER" class="btn btn-primary btn-block"/>
-    </form>
-
     <%
         if (request.getParameter("syncExerciseLibrary") != null) {
-            ExerciseToDatabase exerciseToDb = new ExerciseToDatabase();
-            ArrayList<Exercise> generatedExercises = exerciseToDb.getExercisesFromWGER();
+            WgerApiReader wgerApiReader = new WgerApiReader();
+            ArrayList<WgerExercise> generatedExercises = wgerApiReader.getExercisesFromWGER();
             JpaExerciseRepository exerciseRepo = new JpaExerciseRepository();
             exerciseRepo.addExercise(generatedExercises);
 

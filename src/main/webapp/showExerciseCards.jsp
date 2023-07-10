@@ -1,8 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="java.util.*" %>
 <%@ page import="com.repository.JpaExerciseRepository" %>
-<%@ page import="com.repository.ExerciseToDatabase" %>
-<%@ page import="com.model.Exercise" %>
+<%@ page import="com.repository.WgerApiReader" %>
+<%@ page import="com.model.WgerExercise" %>
 <html>
  <head>
      <meta charset="utf-8">
@@ -28,6 +28,9 @@
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="showExercises.jsp">Exercises</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">My Exercises</a>
+              </li>
     		  <li class="nav-item">
                 <a class="nav-link" href="#">Workouts</a>
               </li>
@@ -43,15 +46,16 @@
         </div>
       </nav>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
     <h1>List of exercises</h1>
       <div class="album py-5 bg-body-tertiary">
         <div class="container">
 
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
   <% JpaExerciseRepository repository = new JpaExerciseRepository();
-      List<Exercise> exercises = repository.getAllExercises();
+      List<WgerExercise> exercises = repository.getAllExercises();
        if(exercises != null){
-               for (Exercise exercise : exercises) { %>
+               for (WgerExercise exercise : exercises) { %>
 
                            <div class="col">
                                     <div class="card shadow-sm">
@@ -61,8 +65,10 @@
                                         <p class="card-text"><%= exercise.getCategory().getName() %></p>
                                         <div class="d-flex justify-content-between align-items-center">
                                           <div class="btn-group">
-                                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            <a  href="viewExercise.jsp" >
+                                                <button type="submit" class="btn btn-sm btn-outline-secondary">View</button>
+                                            </a>
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">Add to My Exercises</button>
                                           </div>
                                           <small class="text-body-secondary">9 mins</small>
                                         </div>
@@ -77,6 +83,14 @@
      </div>
      </div>
       </div>
+<br/>
+<br/>
+      <h2>Sync exercise library </h2>
+
+    <form action="" method="POST">
+        <br/>
+        <input type="submit" name="syncExerciseLibrary" value="Read exercise from WGER" class="btn btn-primary btn-block"/>
+    </form>
 <br/>
 <br/>
          <form action="index.jsp">

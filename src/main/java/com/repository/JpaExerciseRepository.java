@@ -11,7 +11,7 @@ public class JpaExerciseRepository {
     EntityManager entityManager = emFactory.createEntityManager();
 
     public List<WgerExercise> getAllExercises() {
-        TypedQuery<WgerExercise> typedQuery = entityManager.createQuery("select e from Exercise e", WgerExercise.class);
+        TypedQuery<WgerExercise> typedQuery = entityManager.createQuery("select e from WgerExercise e", WgerExercise.class);
         List<WgerExercise> wgerExerciseList = typedQuery.getResultList();
         entityManager.close();
         emFactory.close();

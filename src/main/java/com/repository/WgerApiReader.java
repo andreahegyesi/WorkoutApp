@@ -12,7 +12,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
-public class WGERApiReader {
+public class WgerApiReader {
     ArrayList <WgerExercise> wgerExerciseList = new ArrayList<>();
     public ArrayList<WgerExercise> getExercisesFromWGER() {
         HttpClient client = HttpClient.newHttpClient();
