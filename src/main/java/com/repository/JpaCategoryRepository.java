@@ -1,7 +1,6 @@
 package com.repository;
 
 import com.model.Category;
-import com.model.WgerExercise;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;

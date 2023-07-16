@@ -15,13 +15,15 @@ public class WgerExercise {
     private int id;
     private String name;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "category", referencedColumnName = "id")
     private Category category;
     private String description;
+
     private ArrayList<Integer> muscles;
     private ArrayList<Integer> secondaryMuscles;
     private ArrayList<Integer> equipment;
+    private String imageSource;
 
 
     public WgerExercise(int id, String name) {
@@ -36,7 +38,7 @@ public class WgerExercise {
         this.name = name;
     }
 
-    public WgerExercise(int id, String name, Category category, String description, ArrayList<Integer> muscles, ArrayList<Integer> secondaryMuscles, ArrayList<Integer> equipment) {
+    public WgerExercise(int id, String name, Category category, String description, ArrayList<Integer> muscles, ArrayList<Integer> secondaryMuscles, ArrayList<Integer> equipment, String imageSource) {
         this.id = id;
         this.name = name;
         this.category = category;
@@ -44,6 +46,7 @@ public class WgerExercise {
         this.muscles = muscles;
         this.secondaryMuscles = secondaryMuscles;
         this.equipment = equipment;
+        this.imageSource = imageSource;
     }
 
 }

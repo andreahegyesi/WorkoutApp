@@ -9,6 +9,8 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>com.model.WgerExercise</class>
         <class>com.model.Category</class>
+        <class>com.model.Muscle</class>
+        <class>com.model.Equipment</class>
 
         <properties>
 

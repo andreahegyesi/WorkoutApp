@@ -34,6 +34,8 @@ public class WgerApiReader {
 
                     String exerciseName = "UNDEFINED";
                     String exerciseDescription = "UNDEFINED";
+                    String imagesource = "UNDEFINED";
+
                     JsonArray exerciseLanguages = exerciseJson.getAsJsonArray("exercises");
                     for (JsonElement language : exerciseLanguages) {
                         int languageCode = language.getAsJsonObject().get("language").getAsInt();
@@ -64,10 +66,15 @@ public class WgerApiReader {
                         equipmentIds.add(equipmentId);
                     }
 
+                    JsonArray images = exerciseJson.getAsJsonArray("images");
+                    for (JsonElement source: images){
+                        imagesource = source.getAsJsonObject().get("image").getAsString();
+                    }
+
 
                     System.out.println("ID:" + exerciseId + " Name: " + exerciseName + " Category: " + categoryId + " Description: " + exerciseDescription + "Muscles" + muscleIds +
                             "Secondary muscles " + muscleSecondaryIds + "Equipment:" + equipmentIds);
-                    WgerExercise wgerExercise = new WgerExercise(exerciseId, exerciseName, new Category(categoryId, categoryName), exerciseDescription, muscleIds, muscleSecondaryIds, equipmentIds);
+                    WgerExercise wgerExercise = new WgerExercise(exerciseId, exerciseName, new Category(categoryId, categoryName), exerciseDescription, muscleIds, muscleSecondaryIds, equipmentIds, imagesource);
                     wgerExerciseList.add(wgerExercise);
                 }
                 return wgerExerciseList;

@@ -1,8 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="java.util.*" %>
 <%@ page import="com.repository.JpaCategoryRepository" %>
+<%@ page import="com.repository.JpaMuscleRepository" %>
 <%@ page import="com.repository.WgerApiReader" %>
 <%@ page import="com.model.Category" %>
+<%@ page import="com.model.Muscle" %>
 <html>
 
  <head>
@@ -14,7 +16,7 @@
 <body>
 <h1>Create your own exercise!</h1>
 <form>
-  <div class="form-group w-50" >
+  <div class="form-group w-50 " >
     <label for="exampleFormControlInput1">Name</label>
     <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Exercise Name">
   </div>
@@ -28,15 +30,51 @@
         <%}%>
     </select>
   </div>
-  <div class="form-group w-50"">
-    <label for="exampleFormControlTextarea1">Description</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+
+    <div class="form-group w-50"">
+      <label for="exampleFormControlTextarea1">Description</label>
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+
+   <div class="form-group w-50">
+       <label for="exampleFormControlSelect1">Muscles</label>
+          <%JpaMuscleRepository muscleRepo = new JpaMuscleRepository();
+          List<Muscle> muscles = muscleRepo.getAllMuscles();
+          for (Muscle muscle : muscles) { %>
+              <div class="form-check">
+                 <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+               <%=muscle.getName() %>
+          </label>
+          </div>
+          <%}%>
+    </div>
+
+    <div class="form-group w-50">
+        <label for="exampleFormControlSelect1">Secondary Muscles</label>
+           <%for (Muscle muscle : muscles) { %>
+               <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                  <label class="form-check-label" for="defaultCheck1">
+                    <%=muscle.getName() %>
+           </label>
+           </div>
+           <%}%>
+        </div>
+
+  <div>
+    <label for="formFileLg" class="form-label w-50">Upload image</label>
+    <input class="form-control w-50" type="file" id="formFile">
   </div>
   <br>
    <button type="submit" class="btn btn-primary">Create new exercise</button>
 </form>
+        <form action="showMyExercises.jsp">
+          <input type="submit" value="Back to My Exercises"/>
+         </form>
          <form action="index.jsp">
              <input type="submit" value="Back to home page"/>
          </form>
+
 </body>
 </html>

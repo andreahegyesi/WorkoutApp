@@ -1,6 +1,5 @@
 package com.repository;
 
-import com.model.Category;
 import com.model.WgerExercise;
 import jakarta.persistence.*;
 
@@ -34,14 +33,6 @@ public class JpaWgerExerciseRepository {
         entityManager.getTransaction().commit();
         entityManager.close();
         emFactory.close();
-    }
-
-    public List<Category> getCategories(){
-        TypedQuery<Category> typedQuery = entityManager.createQuery("select c from Category c", Category.class);
-        List<Category> categoryList = typedQuery.getResultList();
-        entityManager.close();
-        emFactory.close();
-        return categoryList;
     }
 
 

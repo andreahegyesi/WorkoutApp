@@ -26,7 +26,7 @@
                 <a class="nav-link" aria-current="page" href="index.jsp">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="showExercises.jsp">Exercises</a>
+                <a class="nav-link active" aria-current="page" href="showExerciseCards.jsp">Exercises</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="showMyExercises.jsp">My Exercises</a>
@@ -47,7 +47,7 @@
       </nav>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
-    <h1>List of exercises</h1>
+
       <div class="album py-5 bg-body-tertiary">
         <div class="container">
 
@@ -58,11 +58,15 @@
                for (WgerExercise exercise : exercises) { %>
 
                            <div class="col">
-                                    <div class="card shadow-sm">
-                                      <img class="card-img-top" src="/WorkoutApp/images/dumbbell.svg" alt="Card image cap">
+                                    <div class="card">
+                                    <%if (exercise.getImageSource().equals("UNDEFINED")){%>
+                                      <img class="card-img-top" src ="/WorkoutApp/images/no-image.svg" alt="Image placeholder" style="object-fit:cover; width:360px; height:300px;">
+                                      <%}else{%>
+                                      <img class="card-img-top"  src=<%= exercise.getImageSource() %> alt="Image placeholder" style="object-fit:contain; width:360px; height:300px;">
+                                      <%}%>
                                       <div class="card-body">
                                       <h5 class="card-title"><%= exercise.getName() %></h5>
-                                      <div class="d-flex gap-2 py-5">
+                                      <div class="d-flex gap-2 py-2">
                                       <span class="badge text-bg-primary rounded-pill"><p class="card-text"><%= exercise.getCategory().getName() %></p></span>
                                        </div>
                                         <div class="d-flex justify-content-between align-items-center">
@@ -93,6 +97,15 @@
         <br/>
         <input type="submit" name="syncExerciseLibrary" value="Read exercise from WGER" class="btn btn-primary btn-block"/>
     </form>
+
+        <%
+            if (request.getParameter("syncExerciseLibrary") != null) {
+                WgerApiReader wgerApiReader = new WgerApiReader();
+                ArrayList<WgerExercise> generatedExercises = wgerApiReader.getExercisesFromWGER();
+                JpaWgerExerciseRepository exerciseRepo = new JpaWgerExerciseRepository();
+                exerciseRepo.addExercise(generatedExercises);
+            }
+        %>
 <br/>
 <br/>
          <form action="index.jsp">
