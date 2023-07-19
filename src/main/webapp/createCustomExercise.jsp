@@ -19,24 +19,20 @@
   ArrayList<Integer> muscleArrayList = Arrays.stream(muscles)
             .map(Integer::parseInt)
             .collect(Collectors.toCollection(ArrayList::new));
-  out.println(muscles.length);
-  out.println(muscleArrayList);
 
   String[] secondaryMuscles = request.getParameterValues("secondarymuscle");
   ArrayList<Integer> secondaryMuscleArrayList = Arrays.stream(secondaryMuscles)
           .map(Integer::parseInt)
           .collect(Collectors.toCollection(ArrayList::new));
-  out.println(secondaryMuscles.length);
-  out.println(secondaryMuscleArrayList);
 
   String[] equipment = request.getParameterValues("equipment");
   ArrayList<Integer> equipmentArrayList = Arrays.stream(equipment)
           .map(Integer::parseInt)
           .collect(Collectors.toCollection(ArrayList::new));
-  out.println(equipment.length);
-  out.println(equipmentArrayList);
 
   CustomExercise customExercise = new CustomExercise(name,category,description,muscleArrayList,secondaryMuscleArrayList,equipmentArrayList, "UNDEFINED");
   JpaCustomExerciseRepository customExerciseRepo = new JpaCustomExerciseRepository();
   customExerciseRepo.addCustomExercise(customExercise);
 %>
+
+  <meta http-equiv="Refresh" content="0; url='/WorkoutApp/createNewExercise.jsp" />

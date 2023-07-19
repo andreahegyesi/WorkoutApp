@@ -26,7 +26,7 @@
                 <a class="nav-link" aria-current="page" href="index.jsp">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="showExerciseCards.jsp">Exercises</a>
+                <a class="nav-link active" aria-current="page" href="showWgerExercises.jsp">Exercises</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="showMyExercises.jsp">My Exercises</a>
@@ -72,7 +72,7 @@
                                         <div class="d-flex justify-content-between align-items-center">
                                           <div class="btn-group">
                                             <a  href=<%= "viewExercise.jsp?id=" + exercise.getId() %>>
-                                                <button type="submit" class="btn btn-sm btn-outline-secondary">View</button>
+                                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
                                             </a>
                                             <a  href=<%= "addExerciseToMyExercises.jsp?id=" + exercise.getId() %>>
                                             <button type="submit" class="btn btn-sm btn-outline-secondary">Add to My Exercises</button>

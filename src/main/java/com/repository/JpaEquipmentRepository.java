@@ -15,8 +15,8 @@ public class JpaEquipmentRepository {
         return equipmentList.stream().sorted((firstE, secondE) -> ((Integer)firstE.getId()).compareTo((Integer)secondE.getId())).toList();
     }
 
-    public String findEquipmentNameById(Integer findId) {
-        Equipment equipment = entityManager.find(Equipment.class, findId);
+    public String findEquipmentNameById(Integer id) {
+        Equipment equipment = entityManager.find(Equipment.class, id);
         //entityManager.close();
         //emFactory.close();
         return equipment.getName();

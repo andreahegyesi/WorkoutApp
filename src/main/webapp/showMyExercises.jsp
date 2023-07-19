@@ -27,7 +27,7 @@
                 <a class="nav-link" href="index.jsp">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="showExerciseCards.jsp">Exercises</a>
+                <a class="nav-link" href="showWgerExercises.jsp">Exercises</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="showMyExercises.jsp">My Exercises</a>
@@ -78,10 +78,13 @@
                     <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                         <a  href=<%= "viewExercise.jsp?id=" + customExercise.getId() %>>
-                            <button type="submit" class="btn btn-sm btn-outline-secondary">Update</button>
+                            <button type="submit" class="btn btn-sm btn-outline-secondary">View</button>
                         </a>
-                        <a  href=<%= "addExerciseToMyExercises.jsp?id=" + customExercise.getId() %>>
-                            <button type="submit" class="btn btn-sm btn-outline-secondary">Delete</button>
+                        <a  href=<%= "viewExercise.jsp?id=" + customExercise.getId() %>>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Update</button>
+                        </a>
+                        <a  href=<%= "deleteCustomExercise.jsp?id=" + customExercise.getId() %>>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
                         </a>
                     </div>
                     <small class="text-body-secondary">id=<%=customExercise.getId() %></small>

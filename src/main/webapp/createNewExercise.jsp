@@ -18,7 +18,7 @@
 <body>
 <h1>Create your own exercise!</h1>
 
-<form action="createExercise.jsp">
+<form action="createCustomExercise.jsp">
   <div class="form-group w-50 " >
     <label for="exampleFormControlInput1">Name</label>
     <input type="text" class="form-control" name = "name" id="exampleFormControlInput1" placeholder="Exercise Name">

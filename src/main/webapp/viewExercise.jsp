@@ -68,7 +68,7 @@
 
 <br/>
 <br/>
-         <form action="showExerciseCards.jsp">
+         <form action="showWgerExercises.jsp">
              <input type="submit" value="Back to exercises"/>
          </form>
 </body>

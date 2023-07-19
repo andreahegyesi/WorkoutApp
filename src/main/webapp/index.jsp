@@ -27,7 +27,7 @@
                 <a class="nav-link active" aria-current="page" href="index.jsp">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="showExerciseCards.jsp">Exercises</a>
+                <a class="nav-link" aria-current="page" href="showWgerExercises.jsp">Exercises</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="showMyExercises.jsp">My Exercises</a>

@@ -17,9 +17,9 @@ public class JpaCategoryRepository {
         return categoryList;
     }
 
-    public Category findCategoryByName(String findCategoryName){
+    public Category findCategoryByName(String name){
         //TypedQuery<Student> typedQuery = entityManager.createQuery(("select s from Student s WHERE s.name = '" + findName + "'"), Student.class);
-        TypedQuery<Category> typedQuery = entityManager.createQuery(("select c from Category c WHERE c.name LIKE '%" + findCategoryName + "%'"), Category.class);
+        TypedQuery<Category> typedQuery = entityManager.createQuery(("select c from Category c WHERE c.name LIKE '%" + name + "%'"), Category.class);
         Category category = typedQuery.getSingleResult();
         entityManager.close();
         emFactory.close();

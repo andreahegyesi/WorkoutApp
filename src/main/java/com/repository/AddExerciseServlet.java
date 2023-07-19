@@ -23,6 +23,6 @@ public class AddExerciseServlet extends HttpServlet {
         resp.getOutputStream().println("Added!");
         System.out.println("Button clicked! Java code executed.");
 
-        getServletContext().getRequestDispatcher("/showExerciseCards.jsp").forward(req, resp);
+        getServletContext().getRequestDispatcher("/showWgerExercises.jsp").forward(req, resp);
     }
 }

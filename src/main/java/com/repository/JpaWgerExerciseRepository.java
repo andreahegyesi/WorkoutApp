@@ -44,8 +44,8 @@ public class JpaWgerExerciseRepository {
         emFactory.close();
         return studentListByNames;
     } */
-    public WgerExercise findWgerExerciseById(int findId) {
-        WgerExercise wgerExercise = entityManager.find(WgerExercise.class, findId);
+    public WgerExercise findWgerExerciseById(int id) {
+        WgerExercise wgerExercise = entityManager.find(WgerExercise.class, id);
         entityManager.close();
         emFactory.close();
         return wgerExercise;

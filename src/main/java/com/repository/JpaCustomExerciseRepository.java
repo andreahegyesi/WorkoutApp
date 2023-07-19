@@ -36,10 +36,17 @@ public class JpaCustomExerciseRepository {
         //emFactory.close();
     }
 
-    public CustomExercise findCustomExerciseById(int findId) {
-        CustomExercise customExercise = entityManager.find(CustomExercise.class, findId);
+    public CustomExercise findCustomExerciseById(int id) {
+        CustomExercise customExercise = entityManager.find(CustomExercise.class, id);
         //entityManager.close();
         //emFactory.close();
         return customExercise;
+    }
+
+    public void deleteCustomExercise(int id){
+        entityManager.getTransaction( ).begin( );
+        CustomExercise customExercise = entityManager.find(CustomExercise.class, id);
+        entityManager.remove(customExercise);
+        entityManager.getTransaction( ).commit( );
     }
 }

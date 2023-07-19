@@ -19,15 +19,15 @@ public class JpaMuscleRepository {
         return muscleList.stream().sorted((firstM, secondM) -> ((Integer)firstM.getId()).compareTo((Integer)secondM.getId())).toList();
     }
 
-    public String findMuscleNameById(Integer findId) {
-        Muscle muscle = entityManager.find(Muscle.class, findId);
+    public String findMuscleNameById(Integer id) {
+        Muscle muscle = entityManager.find(Muscle.class, id);
         //entityManager.close();
         //emFactory.close();
         return muscle.getName();
     }
 
-    public int findMuscleByName(String findMuscleName){
-        TypedQuery<Muscle> typedQuery = entityManager.createQuery(("select m from Muscle m WHERE m.name LIKE '%" + findMuscleName + "%'"), Muscle.class);
+    public int findMuscleByName(String name){
+        TypedQuery<Muscle> typedQuery = entityManager.createQuery(("select m from Muscle m WHERE m.name LIKE '%" + name + "%'"), Muscle.class);
         Muscle muscle = typedQuery.getSingleResult();
         entityManager.close();
         emFactory.close();
