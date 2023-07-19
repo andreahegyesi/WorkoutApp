@@ -12,7 +12,7 @@ public class JpaEquipmentRepository {
         List<Equipment> equipmentList = typedQuery.getResultList();
         //entityManager.close();
         //emFactory.close();
-        return equipmentList;
+        return equipmentList.stream().sorted((firstE, secondE) -> ((Integer)firstE.getId()).compareTo((Integer)secondE.getId())).toList();
     }
 
     public String findEquipmentNameById(Integer findId) {

@@ -1,8 +1,11 @@
 package com.repository;
-
+import java.util.*;
+import java.util.stream.Collectors;
 import com.model.Muscle;
 import jakarta.persistence.*;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 public class JpaMuscleRepository {
     EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Hibernate_JPA");
@@ -13,7 +16,7 @@ public class JpaMuscleRepository {
         List<Muscle> muscleList = typedQuery.getResultList();
         //entityManager.close();
         //emFactory.close();
-        return muscleList;
+        return muscleList.stream().sorted((firstM, secondM) -> ((Integer)firstM.getId()).compareTo((Integer)secondM.getId())).toList();
     }
 
     public String findMuscleNameById(Integer findId) {
@@ -21,6 +24,14 @@ public class JpaMuscleRepository {
         //entityManager.close();
         //emFactory.close();
         return muscle.getName();
+    }
+
+    public int findMuscleByName(String findMuscleName){
+        TypedQuery<Muscle> typedQuery = entityManager.createQuery(("select m from Muscle m WHERE m.name LIKE '%" + findMuscleName + "%'"), Muscle.class);
+        Muscle muscle = typedQuery.getSingleResult();
+        entityManager.close();
+        emFactory.close();
+        return muscle.getId();
     }
 
 }

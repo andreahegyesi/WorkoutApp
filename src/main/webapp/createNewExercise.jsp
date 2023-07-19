@@ -18,7 +18,7 @@
 <body>
 <h1>Create your own exercise!</h1>
 
-<form>
+<form action="createExercise.jsp">
   <div class="form-group w-50 " >
     <label for="exampleFormControlInput1">Name</label>
     <input type="text" class="form-control" name = "name" id="exampleFormControlInput1" placeholder="Exercise Name">
@@ -26,7 +26,7 @@
 
   <div class="form-group w-50">
     <label for="exampleFormControlSelect1">Category</label>
-    <select class="form-control" id="exampleFormControlSelect1">
+    <select class="form-control" name = "category" id="exampleFormControlSelect1">
        <% JpaCategoryRepository categoryRepository = new JpaCategoryRepository();
        List<Category> categories = categoryRepository.getAllCategories();
        for (Category category : categories) { %>
@@ -37,7 +37,7 @@
 
     <div class="form-group w-50"">
       <label for="exampleFormControlTextarea1">Description</label>
-      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+      <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3"></textarea>
     </div>
 
    <div class="form-group w-50">
@@ -46,7 +46,7 @@
           List<Muscle> muscles = muscleRepo.getAllMuscles();
           for (Muscle muscle : muscles) { %>
               <div class="form-check">
-                 <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                 <input class="form-check-input" type="checkbox" name="muscle" value=<%=muscle.getId()%> id="defaultCheck1">
                 <label class="form-check-label" for="defaultCheck1">
                <%=muscle.getName() %>
           </label>
@@ -58,7 +58,7 @@
         <label for="exampleFormControlSelect1">Secondary Muscles</label>
            <%for (Muscle muscle : muscles) { %>
                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                  <input class="form-check-input" type="checkbox" name="secondarymuscle" value=<%=muscle.getId()%> id="defaultCheck1">
                   <label class="form-check-label" for="defaultCheck1">
                     <%=muscle.getName() %>
            </label>
@@ -72,7 +72,7 @@
             List<Equipment> equipmentList = equipmentRepo.getAllEquipment();
             for (Equipment equipment : equipmentList) { %>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                    <input class="form-check-input" type="checkbox" name= "equipment" value=<%=equipment.getId()%> id="defaultCheck1">
                     <label class="form-check-label" for="defaultCheck1">
                     <%=equipment.getName() %>
                     </label>
