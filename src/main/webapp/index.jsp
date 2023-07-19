@@ -77,9 +77,6 @@
    <script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
 
-
-        <h2>Show all exercises</h2>
-
             <form action="showExercises.jsp">
                 <div class="form-outline mb-4">
             <br/>

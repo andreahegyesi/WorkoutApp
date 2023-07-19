@@ -1,8 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="java.util.*" %>
-<%@ page import="com.repository.JpaWgerExerciseRepository" %>
+<%@ page import="com.repository.JpaCustomExerciseRepository" %>
 <%@ page import="com.repository.WgerApiReader" %>
-<%@ page import="com.model.WgerExercise" %>
+<%@ page import="com.model.CustomExercise" %>
+
 <html>
  <head>
      <meta charset="utf-8">
@@ -26,7 +27,7 @@
                 <a class="nav-link" href="index.jsp">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="showExercises.jsp">Exercises</a>
+                <a class="nav-link" href="showExerciseCards.jsp">Exercises</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="showMyExercises.jsp">My Exercises</a>
@@ -47,17 +48,55 @@
       </nav>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
-    <h1>My exercises</h1>
-
-         <form action="index.jsp">
-             <input type="submit" value="Back to home page"/>
-         </form>
-<br>
-<br>
          <form action="createNewExercise.jsp">
-             <input type="submit" value="Create new exercise"/>
+             <div class="form-outline mb-4">
+         <br/>
+         <input type="submit" value="Create new exercise" class="btn btn-primary btn-block"/>
          </form>
+<br>
+<br>
 
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <% JpaCustomExerciseRepository repository = new JpaCustomExerciseRepository();
+            List<CustomExercise> customExercises = repository.getAllCustomExercises();
+            if(customExercises != null){
+                for (CustomExercise customExercise: customExercises) { %>
+                    <div class="col">
+                    <div class="card">
+                    <%if (customExercise.getImageSource().equals("UNDEFINED")){%>
+                    <img class="card-img-top" src ="/WorkoutApp/images/no-image.svg" alt="Image placeholder" style="object-fit:cover; width:360px; height:300px;">
+                    <%}else{%>
+                    <img class="card-img-top"  src=<%= customExercise.getImageSource() %> alt="Image placeholder" style="object-fit:contain; width:360px; height:300px;">
+                    <%}%>
+                    <div class="card-body">
+                        <h5 class="card-title"><%= customExercise.getName() %></h5>
+                        <div class="d-flex gap-2 py-2">
+                        <span class="badge text-bg-primary rounded-pill"><p class="card-text"><%= customExercise.getCategory().getName() %></p></span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                        <a  href=<%= "viewExercise.jsp?id=" + customExercise.getId() %>>
+                            <button type="submit" class="btn btn-sm btn-outline-secondary">Update</button>
+                        </a>
+                        <a  href=<%= "addExerciseToMyExercises.jsp?id=" + customExercise.getId() %>>
+                            <button type="submit" class="btn btn-sm btn-outline-secondary">Delete</button>
+                        </a>
+                    </div>
+                    <small class="text-body-secondary">id=<%=customExercise.getId() %></small>
+                    </div>
+                       </div>
+                          </div>
+                            </div>
+                     <% }
+        }
+        else{%>
+           <p> No content </p>
+        <%}%>
+     </div>
+     </div>
+      </div>
 </body>
 </html>
 

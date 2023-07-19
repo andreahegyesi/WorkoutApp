@@ -2,9 +2,11 @@
 <%@ page import="java.util.*" %>
 <%@ page import="com.repository.JpaCategoryRepository" %>
 <%@ page import="com.repository.JpaMuscleRepository" %>
+<%@ page import="com.repository.JpaEquipmentRepository" %>
 <%@ page import="com.repository.WgerApiReader" %>
 <%@ page import="com.model.Category" %>
 <%@ page import="com.model.Muscle" %>
+<%@ page import="com.model.Equipment" %>
 <html>
 
  <head>
@@ -15,11 +17,13 @@
   </head>
 <body>
 <h1>Create your own exercise!</h1>
+
 <form>
   <div class="form-group w-50 " >
     <label for="exampleFormControlInput1">Name</label>
-    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Exercise Name">
+    <input type="text" class="form-control" name = "name" id="exampleFormControlInput1" placeholder="Exercise Name">
   </div>
+
   <div class="form-group w-50">
     <label for="exampleFormControlSelect1">Category</label>
     <select class="form-control" id="exampleFormControlSelect1">
@@ -62,12 +66,26 @@
            <%}%>
         </div>
 
+     <div class="form-group w-50">
+        <label for="exampleFormControlSelect1">Equipment</label>
+            <%JpaEquipmentRepository equipmentRepo = new JpaEquipmentRepository();
+            List<Equipment> equipmentList = equipmentRepo.getAllEquipment();
+            for (Equipment equipment : equipmentList) { %>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                    <label class="form-check-label" for="defaultCheck1">
+                    <%=equipment.getName() %>
+                    </label>
+                </div>
+             <%}%>
+     </div>
+
   <div>
     <label for="formFileLg" class="form-label w-50">Upload image</label>
     <input class="form-control w-50" type="file" id="formFile">
   </div>
   <br>
-   <button type="submit" class="btn btn-primary">Create new exercise</button>
+   <button type="submit" class="btn btn-primary">Create exercise</button>
 </form>
         <form action="showMyExercises.jsp">
           <input type="submit" value="Back to My Exercises"/>

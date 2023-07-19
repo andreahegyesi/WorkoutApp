@@ -11,6 +11,7 @@
         <class>com.model.Category</class>
         <class>com.model.Muscle</class>
         <class>com.model.Equipment</class>
+        <class>com.model.CustomExercise</class>
 
         <properties>
 

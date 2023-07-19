@@ -74,9 +74,17 @@
                                             <a  href=<%= "viewExercise.jsp?id=" + exercise.getId() %>>
                                                 <button type="submit" class="btn btn-sm btn-outline-secondary">View</button>
                                             </a>
-                                            <button type="button" class="btn btn-sm btn-outline-secondary">Add to My Exercises</button>
+                                            <a  href=<%= "addExerciseToMyExercises.jsp?id=" + exercise.getId() %>>
+                                            <button type="submit" class="btn btn-sm btn-outline-secondary">Add to My Exercises</button>
+                                            </a>
+                                              <form action="addCustomExercise" method="post">
+                                                    <button type="submit" name="Execute" value=<%=exercise.getId() %>>Gomb </button>
+                                              </form>
+
+
+
                                           </div>
-                                          <small class="text-body-secondary">9 mins</small>
+                                          <small class="text-body-secondary">id=<%=exercise.getId() %></small>
                                         </div>
                                       </div>
                                     </div>
