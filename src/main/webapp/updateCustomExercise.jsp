@@ -26,10 +26,13 @@
 <body>
 <h1>Update your exercise!</h1>
 
-<form action="createCustomExercise.jsp">
+<form action="updateExercise.jsp">
+
+    <input type="hidden" name="id" value=<%=customExercise.getId()%> />
+
   <div class="form-group w-50 " >
     <label for="exampleFormControlInput1">Name</label>
-    <input type="text" class="form-control" name = "name" id="exampleFormControlInput1" value=<%=customExercise.getName()%>>
+    <input type="text" class="form-control" name = "name" id="exampleFormControlInput1" value=<%="\"" + customExercise.getName() + "\""%>>
   </div>
 
   <div class="form-group w-50">
@@ -37,42 +40,51 @@
     <select class="form-control" name = "category" id="exampleFormControlSelect1">
        <% JpaCategoryRepository categoryRepository = new JpaCategoryRepository();
        List<Category> categories = categoryRepository.getAllCategories();
-       for (Category category : categories) { %>
-            <option><%=category.getName() %></option>
-        <%}%>
+       for (Category category : categories) {
+            if (customExercise.getCategory().getId() == category.getId()){%>
+                 <option selected><%=category.getName() %></option>
+            <%}else{%>
+                <option><%=category.getName() %></option>
+        <%}}%>
     </select>
   </div>
 
-    <div class="form-group w-50"">
+    <div class="form-group w-50">
       <label for="exampleFormControlTextarea1">Description</label>
-      <textarea class="form-control" name="description" id="exampleFormControlTextarea1" value=<%=customExercise.getDescription()%> rows="3"></textarea>
+      <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows = "5"> <%=customExercise.getDescription()%> </textarea>
     </div>
 
    <div class="form-group w-50">
        <label for="exampleFormControlSelect1">Muscles</label>
           <%JpaMuscleRepository muscleRepo = new JpaMuscleRepository();
           List<Muscle> muscles = muscleRepo.getAllMuscles();
-          for (Muscle muscle : muscles) { %>
+          for (Muscle muscle : muscles){%>
               <div class="form-check">
-                 <input class="form-check-input" type="checkbox" name="muscle" value=<%=muscle.getId()%> id="defaultCheck1">
+              <%if (customExercise.getMuscles().contains(muscle.getId())){%>
+                <input class="form-check-input" type="checkbox" name="muscle" value=<%=muscle.getId()%> id="defaultCheck1" checked>
+              <%}else{%>
+                <input class="form-check-input" type="checkbox" name="muscle" value=<%=muscle.getId()%> id="defaultCheck1">
+                <%}%>
                 <label class="form-check-label" for="defaultCheck1">
-               <%=muscle.getName() %>
-          </label>
-          </div>
+                <%=muscle.getName() %>
+                </label>
+              </div>
           <%}%>
-    </div>
 
     <div class="form-group w-50">
         <label for="exampleFormControlSelect1">Secondary Muscles</label>
            <%for (Muscle muscle : muscles) { %>
-               <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="secondarymuscle" value=<%=muscle.getId()%> id="defaultCheck1">
-                  <label class="form-check-label" for="defaultCheck1">
-                    <%=muscle.getName() %>
-           </label>
-           </div>
-           <%}%>
-        </div>
+              <div class="form-check">
+              <%if (customExercise.getSecondaryMuscles().contains(muscle.getId())){%>
+                <input class="form-check-input" type="checkbox" name="secondarymuscle" value=<%=muscle.getId()%> id="defaultCheck1" checked >
+                <%}else{%>
+                <input class="form-check-input" type="checkbox" name="secondarymuscle" value=<%=muscle.getId()%> id="defaultCheck1">
+                <%}%>
+                <label class="form-check-label" for="defaultCheck1">
+                <%=muscle.getName() %>
+                </label>
+                </div>
+               <%}%>
 
      <div class="form-group w-50">
         <label for="exampleFormControlSelect1">Equipment</label>
@@ -80,20 +92,23 @@
             List<Equipment> equipmentList = equipmentRepo.getAllEquipment();
             for (Equipment equipment : equipmentList) { %>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name= "equipment" value=<%=equipment.getId()%> id="defaultCheck1">
-                    <label class="form-check-label" for="defaultCheck1">
-                    <%=equipment.getName() %>
-                    </label>
+                    <%if (customExercise.getEquipment().contains(equipment.getId())){%>
+                        <input class="form-check-input" type="checkbox" name= "equipment" value=<%=equipment.getId()%> id="defaultCheck1" checked>
+                    <%}else{%>
+                         <input class="form-check-input" type="checkbox" name= "equipment" value=<%=equipment.getId()%> id="defaultCheck1">
+                         <%}%>
+                         <label class="form-check-label" for="defaultCheck1">
+                         <%=equipment.getName() %>
+                         </label>
                 </div>
              <%}%>
-     </div>
 
   <div>
-    <label for="formFileLg" class="form-label w-50">Upload image</label>
-    <input class="form-control w-50" type="file" id="formFile">
+    <label for="formFileLg" class="form-label w-100">Upload image</label>
+    <input class="form-control w-100" type="file" id="formFile">
   </div>
   <br>
-   <button type="submit" class="btn btn-primary">Create exercise</button>
+   <button type="submit" class="btn btn-primary">Update exercise</button>
 </form>
         <form action="showMyExercises.jsp">
           <input type="submit" value="Back to My Exercises"/>

@@ -1,7 +1,9 @@
 package com.repository;
 
 import com.model.CustomExercise;
-import com.model.WgerExercise;
+import com.model.Category;
+import com.model.Muscle;
+import com.model.Equipment;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -41,6 +43,18 @@ public class JpaCustomExerciseRepository {
         //entityManager.close();
         //emFactory.close();
         return customExercise;
+    }
+
+    public void updateCustomExercise(int id,String name, Category category, String description, ArrayList<Integer> muscles, ArrayList<Integer> secondaryMuscles, ArrayList<Integer> equipment){
+        entityManager.getTransaction( ).begin( );
+        CustomExercise customExercise = entityManager.find(CustomExercise.class, id);
+        customExercise.setName(name);
+        customExercise.setCategory(category);
+        customExercise.setDescription(description);
+        customExercise.setMuscles(muscles);
+        customExercise.setSecondaryMuscles(secondaryMuscles);
+        customExercise.setEquipment(equipment);
+        entityManager.getTransaction( ).commit( );
     }
 
     public void deleteCustomExercise(int id){
