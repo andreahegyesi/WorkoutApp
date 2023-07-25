@@ -77,10 +77,10 @@
                     </div>
                     <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                        <a  href=<%= "viewExercise.jsp?id=" + customExercise.getId() %>>
-                            <button type="submit" class="btn btn-sm btn-outline-secondary">View</button>
+                        <a  href=<%= "viewCustomExercise.jsp?id=" + customExercise.getId()%>>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
                         </a>
-                        <a  href=<%= "viewExercise.jsp?id=" + customExercise.getId() %>>
+                        <a  href=<%= "updateCustomExercise.jsp?id=" + customExercise.getId() %>>
                             <button type="button" class="btn btn-sm btn-outline-secondary">Update</button>
                         </a>
                         <a  href=<%= "deleteCustomExercise.jsp?id=" + customExercise.getId() %>>

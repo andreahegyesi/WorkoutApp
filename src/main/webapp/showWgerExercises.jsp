@@ -71,7 +71,7 @@
                                        </div>
                                         <div class="d-flex justify-content-between align-items-center">
                                           <div class="btn-group">
-                                            <a  href=<%= "viewExercise.jsp?id=" + exercise.getId() %>>
+                                            <a  href=<%= "viewWgerExercise.jsp?id=" + exercise.getId() %>>
                                                 <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
                                             </a>
                                             <a  href=<%= "addExerciseToMyExercises.jsp?id=" + exercise.getId() %>>

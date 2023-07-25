@@ -8,7 +8,6 @@
 <%@ page import="com.model.Muscle" %>
 <%@ page import="com.model.Equipment" %>
 
-
 <% String id = request.getParameter("id");
    JpaWgerExerciseRepository repository = new JpaWgerExerciseRepository();
    WgerExercise exercise = repository.findWgerExerciseById(Integer.parseInt(id));
