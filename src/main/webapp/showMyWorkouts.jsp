@@ -1,8 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="java.util.*" %>
-<%@ page import="com.repository.JpaWgerExerciseRepository" %>
+<%@ page import="com.repository.JpaWorkoutPlanRepository" %>
+<%@ page import="com.repository.JpaCustomExerciseRepository" %>
 <%@ page import="com.repository.WgerApiReader" %>
-<%@ page import="com.model.WgerExercise" %>
+<%@ page import="com.model.WorkoutPlan" %>
 <html>
  <head>
      <meta charset="utf-8">
@@ -47,11 +48,39 @@
       </nav>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
-    <h1>My workouts</h1>
+    <h1>Create your own workout plans!</h1>
 
-         <form action="index.jsp">
-             <input type="submit" value="Back to home page"/>
-         </form>
+     <form action="createNewWorkoutPlan.jsp">
+         <div class="form-outline mb-4">
+     <br/>
+     <input type="submit" value="Create new workout plan" class="btn btn-primary btn-block"/>
+     </form>
+
+<br>
+<br>
+<% JpaWorkoutPlanRepository workoutPlanRepo = new JpaWorkoutPlanRepository();
+      List<WorkoutPlan> workoutplans = workoutPlanRepo.getAllWorkoutPlans();
+       if(workoutplans != null){
+               for (WorkoutPlan workoutplan : workoutplans) { %>
+<div class="d-flex flex-column flex-md-row p-4 gap-4 py-md-5 align-items-center justify-content-center">
+  <div class="list-group">
+    <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+      <img src="/WorkoutApp/images/dumbbell.svg" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0">
+      <div class="d-flex gap-2 w-100 justify-content-between">
+        <div>
+          <h6 class="mb-0"><%= workoutplan.getName() %></h6>
+          <%JpaCustomExerciseRepository customExerciseRepo = new JpaCustomExerciseRepository();
+          for(Integer customExerciseId: workoutplan.getExerciseItems()){ %>
+          <p class="mb-0 opacity-75">customExerciseRepo.findCustomExerciseById(customExerciseId).getName()</p>
+          <%}%>
+        </div>
+      </div>
+   </div>
+                        <% }
+           }
+           else{%>
+              <p> No workout plans </p>
+           <%}%>
 </body>
 </html>
 

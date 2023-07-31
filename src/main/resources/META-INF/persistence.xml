@@ -12,6 +12,8 @@
         <class>com.model.Muscle</class>
         <class>com.model.Equipment</class>
         <class>com.model.CustomExercise</class>
+        <class>com.model.WorkoutPlan</class>
+        <class>com.model.ExerciseItem</class>
 
         <properties>
 

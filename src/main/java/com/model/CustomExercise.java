@@ -12,6 +12,7 @@ import java.util.*;
 public class CustomExercise {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    
     private int id;
     private String name;
 

@@ -86,6 +86,9 @@
                         <a  href=<%= "deleteCustomExercise.jsp?id=" + customExercise.getId() %>>
                             <button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
                         </a>
+                        <a  href=<%= "addCustomExerciseToWorkoutPlan.jsp?id=" + customExercise.getId() %>>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Add to Workout</button>
+                        </a>
                     </div>
                     <small class="text-body-secondary">id=<%=customExercise.getId() %></small>
                     </div>
