@@ -64,26 +64,22 @@
       List<WorkoutPlan> workoutplans = workoutPlanRepo.getAllWorkoutPlans();
        if(workoutplans != null){
                for (WorkoutPlan workoutplan : workoutplans) { %>
-<div class="d-flex flex-column flex-md-row p-4 gap-4 py-md-5 align-items-center justify-content-center">
-  <div class="list-group">
-    <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-      <img src="/WorkoutApp/images/dumbbell.svg" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0">
-      <div class="d-flex gap-2 w-100 justify-content-between">
-        <div>
-          <h6 class="mb-0"><%= workoutplan.getName() %></h6>
-          <%JpaCustomExerciseRepository customExerciseRepo = new JpaCustomExerciseRepository();
-          JpaExerciseItemRepository exerciseItemRepo = new JpaExerciseItemRepository();
-          for(Integer exerciseItemId: workoutplan.getExerciseItems()){ %>
-          <p class="mb-0 opacity-75"><%=exerciseItemRepo.findExerciseItemById(exerciseItemId).getCustomExercise().getName() + ": " +
-                                       exerciseItemRepo.findExerciseItemById(exerciseItemId).getSet() + "x" +
-                                       exerciseItemRepo.findExerciseItemById(exerciseItemId).getRepetition()%></p>
-          <%}%>
-        </div>
-      </div>
-   </div>
-                        <% }
-           }
-           else{%>
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title"><%= workoutplan.getName() %></h5>
+    <%JpaCustomExerciseRepository customExerciseRepo = new JpaCustomExerciseRepository();
+      JpaExerciseItemRepository exerciseItemRepo = new JpaExerciseItemRepository();
+      for(Integer exerciseItemId: workoutplan.getExerciseItems()){ %>
+    <p class="card-text"><%=exerciseItemRepo.findExerciseItemById(exerciseItemId).getCustomExercise().getName() + ": " +
+                            exerciseItemRepo.findExerciseItemById(exerciseItemId).getSet() + "x" +
+                            exerciseItemRepo.findExerciseItemById(exerciseItemId).getRepetition()%></p>
+     <%}%>
+    <a href=<%="updateWorkoutPlan.jsp?id=" + workoutplan.getId() %> class="btn btn-sm btn-outline-secondary">View&Update</a>
+    <a href=<%="deleteWorkoutPlan.jsp?id=" + workoutplan.getId() %> class="btn btn-sm btn-outline-secondary">Delete</a>
+  </div>
+</div>
+        <%}
+        }else{%>
               <p> No workout plans </p>
            <%}%>
 </body>

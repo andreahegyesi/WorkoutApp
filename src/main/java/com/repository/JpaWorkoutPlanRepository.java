@@ -36,6 +36,13 @@ public class JpaWorkoutPlanRepository {
         entityManager.getTransaction( ).commit( );
     }
 
+    public void deleteExerciseItemFromWorkoutPlan(int workoutPlanId, Integer exerciseItemId){
+        entityManager.getTransaction( ).begin( );
+        WorkoutPlan workoutPlan= entityManager.find(WorkoutPlan.class, workoutPlanId);
+        workoutPlan.getExerciseItems().remove(exerciseItemId);
+        entityManager.getTransaction( ).commit( );
+    }
+
     public WorkoutPlan findWorkoutPlanById(int id) {
         WorkoutPlan workoutPlan = entityManager.find(WorkoutPlan.class, id);
         //entityManager.close();
