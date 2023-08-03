@@ -18,6 +18,6 @@
    ExerciseItem exerciseItem = new ExerciseItem(customExercise, 4, 15);
    exerciseItemRepo.addExerciseItem(exerciseItem);
    JpaWorkoutPlanRepository workoutPlanRepo = new JpaWorkoutPlanRepository();
-   workoutPlanRepo.addExerciseItemToWorkoutPlan(2,exerciseItem.getId());
+   workoutPlanRepo.addExerciseItemToWorkoutPlan(3,exerciseItem.getId());
    response.sendRedirect("showMyExercises.jsp");
    %>

@@ -2,8 +2,10 @@
 <%@ page import="java.util.*" %>
 <%@ page import="com.repository.JpaWorkoutPlanRepository" %>
 <%@ page import="com.repository.JpaCustomExerciseRepository" %>
+<%@ page import="com.repository.JpaExerciseItemRepository" %>
 <%@ page import="com.repository.WgerApiReader" %>
 <%@ page import="com.model.WorkoutPlan" %>
+<%@ page import="com.model.ExerciseItem" %>
 <html>
  <head>
      <meta charset="utf-8">
@@ -70,8 +72,11 @@
         <div>
           <h6 class="mb-0"><%= workoutplan.getName() %></h6>
           <%JpaCustomExerciseRepository customExerciseRepo = new JpaCustomExerciseRepository();
-          for(Integer customExerciseId: workoutplan.getExerciseItems()){ %>
-          <p class="mb-0 opacity-75">customExerciseRepo.findCustomExerciseById(customExerciseId).getName()</p>
+          JpaExerciseItemRepository exerciseItemRepo = new JpaExerciseItemRepository();
+          for(Integer exerciseItemId: workoutplan.getExerciseItems()){ %>
+          <p class="mb-0 opacity-75"><%=exerciseItemRepo.findExerciseItemById(exerciseItemId).getCustomExercise().getName() + ": " +
+                                       exerciseItemRepo.findExerciseItemById(exerciseItemId).getSet() + "x" +
+                                       exerciseItemRepo.findExerciseItemById(exerciseItemId).getRepetition()%></p>
           <%}%>
         </div>
       </div>
