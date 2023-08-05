@@ -29,7 +29,7 @@
                 <a class="nav-link" href="index.jsp">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="showExercises.jsp">Exercises</a>
+                <a class="nav-link" href="showWgerExercises.jsp">Exercises</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="showMyExercises.jsp">My Exercises</a>
@@ -63,19 +63,19 @@
 <% JpaWorkoutPlanRepository workoutPlanRepo = new JpaWorkoutPlanRepository();
       List<WorkoutPlan> workoutplans = workoutPlanRepo.getAllWorkoutPlans();
        if(workoutplans != null){
-               for (WorkoutPlan workoutplan : workoutplans) { %>
+               for (WorkoutPlan workoutPlan : workoutplans) { %>
 <div class="card" style="width: 18rem;">
   <div class="card-body">
-    <h5 class="card-title"><%= workoutplan.getName() %></h5>
+    <h5 class="card-title"><%= workoutPlan.getName() %></h5>
     <%JpaCustomExerciseRepository customExerciseRepo = new JpaCustomExerciseRepository();
       JpaExerciseItemRepository exerciseItemRepo = new JpaExerciseItemRepository();
-      for(Integer exerciseItemId: workoutplan.getExerciseItems()){ %>
+      for(Integer exerciseItemId: workoutPlan.getExerciseItems()){ %>
     <p class="card-text"><%=exerciseItemRepo.findExerciseItemById(exerciseItemId).getCustomExercise().getName() + ": " +
                             exerciseItemRepo.findExerciseItemById(exerciseItemId).getSet() + "x" +
                             exerciseItemRepo.findExerciseItemById(exerciseItemId).getRepetition()%></p>
      <%}%>
-    <a href=<%="updateWorkoutPlan.jsp?id=" + workoutplan.getId() %> class="btn btn-sm btn-outline-secondary">View&Update</a>
-    <a href=<%="deleteWorkoutPlan.jsp?id=" + workoutplan.getId() %> class="btn btn-sm btn-outline-secondary">Delete</a>
+    <a href=<%="updateWorkoutPlan.jsp?id=" + workoutPlan.getId() %> class="btn btn-sm btn-outline-secondary">View&Update</a>
+    <a href=<%="deleteWorkoutPlan.jsp?id=" + workoutPlan.getId() %> class="btn btn-sm btn-outline-secondary">Delete</a>
   </div>
 </div>
         <%}

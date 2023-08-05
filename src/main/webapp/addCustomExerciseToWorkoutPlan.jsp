@@ -12,12 +12,22 @@
 <%@ page import= "java.util.stream.Collectors" %>
 
 <% String id = request.getParameter("id");
+
    JpaCustomExerciseRepository customRepository = new JpaCustomExerciseRepository();
    CustomExercise customExercise = customRepository.findCustomExerciseById(Integer.parseInt(id));
-   JpaExerciseItemRepository exerciseItemRepo = new JpaExerciseItemRepository();
-   ExerciseItem exerciseItem = new ExerciseItem(customExercise, 4, 15);
-   exerciseItemRepo.addExerciseItem(exerciseItem);
+
    JpaWorkoutPlanRepository workoutPlanRepo = new JpaWorkoutPlanRepository();
-   workoutPlanRepo.addExerciseItemToWorkoutPlan(3,exerciseItem.getId());
+   int workoutPlanId = workoutPlanRepo.findWorkoutPlanIdByName(request.getParameter("workoutplan"));
+
+   int set = Integer.parseInt(request.getParameter("set"));
+   int repetition = Integer.parseInt(request.getParameter("repetition"));
+
+
+   JpaExerciseItemRepository exerciseItemRepo = new JpaExerciseItemRepository();
+   ExerciseItem exerciseItem = new ExerciseItem(customExercise, set, repetition);
+   exerciseItemRepo.addExerciseItem(exerciseItem);
+
+   workoutPlanRepo.addExerciseItemToWorkoutPlan(workoutPlanId,exerciseItem.getId());
+
    response.sendRedirect("showMyExercises.jsp");
    %>

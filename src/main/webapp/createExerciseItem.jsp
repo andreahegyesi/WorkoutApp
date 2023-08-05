@@ -1,8 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="java.util.*" %>
-<%@ page import="com.repository.JpaWgerExerciseRepository" %>
-<%@ page import="com.repository.WgerApiReader" %>
-<%@ page import="com.model.WgerExercise" %>
+<%@ page import="com.repository.JpaCategoryRepository" %>
+<%@ page import="com.repository.JpaWorkoutPlanRepository" %>
+<%@ page import="com.repository.JpaExerciseItemRepository" %>
+<%@ page import="com.model.Category" %>
+<%@ page import="com.model.WorkoutPlan" %>
+<%@ page import="com.model.ExerciseItem" %>
 <html>
 
  <head>
@@ -12,6 +15,7 @@
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
   </head>
 <body>
+
 <nav class="navbar navbar-expand-sm navbar-dark bg-primary" aria-label="Third navbar example">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">
@@ -24,13 +28,13 @@
           <div class="collapse navbar-collapse" id="navbarsExample03">
             <ul class="navbar-nav me-auto mb-2 mb-sm-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="index.jsp">Home</a>
+                <a class="nav-link" href="index.jsp">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="showWgerExercises.jsp">Exercises</a>
+                <a class="nav-link" href="showWgerExercises.jsp">Exercises</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="showMyExercises.jsp">My Exercises</a>
+                <a class="nav-link" aria-current="page" href="showMyExercises.jsp">My Exercises</a>
               </li>
     		  <li class="nav-item">
                 <a class="nav-link" href="showMyWorkouts.jsp">Workouts</a>
@@ -48,41 +52,35 @@
       </nav>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
+<h1>Choose workout plan. Add number of sets and repetitions.</h1>
+<% String id = request.getParameter("id"); %>
+<form action="addCustomExerciseToWorkoutPlan.jsp">
 
-   <main class="form-signin w-50 m-auto">
-     <form>
-        <h1 class="h3 mb-3 fw-normal text-center" >Welcome back!</h1>
-       <img class="mb-4" src="/WorkoutApp/images/dumbbell.svg" alt="" width="72" height="57">
-       <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+  <input type="hidden" class="form-control" name="id" value=<%=id%> >
+  <div class="form-group w-50">
+    <label for="exampleFormControlSelect1">Workout Plan</label>
+    <select class="form-control" name = "workoutplan" id="exampleFormControlSelect1">
+       <% JpaWorkoutPlanRepository workoutplanRepo = new JpaWorkoutPlanRepository();
+       List<WorkoutPlan> workoutPlans = workoutplanRepo.getAllWorkoutPlans();
+       for (WorkoutPlan workoutPlan : workoutPlans) { %>
+            <option><%=workoutPlan.getName() %></option>
+        <%}%>
+    </select>
+  </div>
 
-       <div class="form-floating">
-         <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-         <label for="floatingInput">Email address</label>
-       </div>
-       <div class="form-floating">
-         <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-         <label for="floatingPassword">Password</label>
-       </div>
+    <div class="form-group w-50"">
+      <label for="exampleFormControlTextarea1">Set</label>
+      <input type="number"textarea class="form-control" name="set" id="exampleFormControlTextarea1" rows="1"></textarea>
+    </div>
 
-       <div class="form-check text-start my-3">
-         <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
-         <label class="form-check-label" for="flexCheckDefault">
-           Remember me
-         </label>
-       </div>
-       <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
-       <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2023</p>
-     </form>
-   </main>
-   <script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <div class="form-group w-50"">
+      <label for="exampleFormControlTextarea1">Repetition</label>
+      <input type="number" textarea class="form-control" name="repetition" id="exampleFormControlTextarea1" rows="1"></textarea>
+    </div>
 
-
-            <form action="showExercises.jsp">
-                <div class="form-outline mb-4">
-            <br/>
-            <input type="submit" value="Show all exercises" class="btn btn-primary btn-block"/>
-            </form>
+  <br>
+   <button type="submit" class="btn btn-primary">Add to my workout plan</button>
+</form>
 
 </body>
 </html>
-

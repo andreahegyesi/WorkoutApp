@@ -1,5 +1,6 @@
 package com.repository;
 import com.model.ExerciseItem;
+import com.model.Muscle;
 import com.model.WorkoutPlan;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -48,6 +49,14 @@ public class JpaWorkoutPlanRepository {
         //entityManager.close();
         //emFactory.close();
         return workoutPlan;
+    }
+
+    public int findWorkoutPlanIdByName(String name){
+        TypedQuery<WorkoutPlan> typedQuery = entityManager.createQuery(("select w from WorkoutPlan w  WHERE w.name LIKE '%" + name + "%'"), WorkoutPlan.class);
+        WorkoutPlan workoutPlan= typedQuery.getSingleResult();
+        //entityManager.close();
+        //emFactory.close();
+        return workoutPlan.getId();
     }
 
     public void updateWorkoutPlan(int id, String name, List<Integer> exerciseItems){

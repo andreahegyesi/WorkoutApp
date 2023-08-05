@@ -1,10 +1,11 @@
 package com.repository;
-import com.controller.ExerciseApiServlet;
-import com.model.ExerciseItem;
-import com.model.WorkoutPlan;
+import com.model.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import jakarta.persistence.TypedQuery;
+
+import java.util.List;
 public class JpaExerciseItemRepository {
     EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Hibernate_JPA");
     EntityManager entityManager = emFactory.createEntityManager();
@@ -22,5 +23,20 @@ public class JpaExerciseItemRepository {
         //entityManager.close();
         //emFactory.close();
         return exerciseItem;
+    }
+
+    public boolean checkExerciseItemExistence(int id){
+        TypedQuery<ExerciseItem> typedQuery = entityManager.createQuery(("select e from ExerciseItem e WHERE e.customExercise.getId() = 17"), ExerciseItem.class);
+        List<ExerciseItem> exerciseItemList = typedQuery.getResultList();
+        //entityManager.close();
+        //emFactory.close();
+        return exerciseItemList.size() != 0;
+    }
+
+    public void deleteExerciseItem(int id){
+        entityManager.getTransaction( ).begin( );
+        ExerciseItem exerciseItem = entityManager.find(ExerciseItem.class, id);
+        entityManager.remove(exerciseItem);
+        entityManager.getTransaction( ).commit( );
     }
 }

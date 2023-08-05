@@ -5,8 +5,12 @@
 <%@ page import="java.util.*" %>
 
 <% String id = request.getParameter("id");
+   String wid = request.getParameter("wid");
    JpaWorkoutPlanRepository workoutPlanRepo = new JpaWorkoutPlanRepository();
    workoutPlanRepo.deleteExerciseItemFromWorkoutPlan(3, Integer.parseInt(id));
-%>
 
-  <meta http-equiv="Refresh" content="0; url='/WorkoutApp/updateWorkoutPlan.jsp?id=3" />
+   JpaExerciseItemRepository exerciseItemRepo = new JpaExerciseItemRepository();
+   exerciseItemRepo.deleteExerciseItem(Integer.parseInt(id));
+
+   response.sendRedirect("updateWorkoutPlan.jsp?id=" + wid);
+%>
