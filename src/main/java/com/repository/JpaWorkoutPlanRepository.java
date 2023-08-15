@@ -1,7 +1,5 @@
 package com.repository;
-import com.model.ExerciseItem;
-import com.model.Muscle;
-import com.model.WorkoutPlan;
+import com.model.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -20,6 +18,22 @@ public class JpaWorkoutPlanRepository {
         //entityManager.close();
         //emFactory.close();
         return workoutPlanList;
+    }
+
+    public List<WorkoutPlan> getWorkoutPlanByUser(int userId) {
+        TypedQuery<WorkoutPlan> typedQuery = entityManager.createQuery("select w from WorkoutPlan w", WorkoutPlan.class);
+        List<WorkoutPlan> workoutPlanList = typedQuery.getResultList();
+        List<WorkoutPlan> workoutPlanListByUser = new ArrayList<>();
+        for (WorkoutPlan workoutPlan: workoutPlanList){
+            for (User userFromList: workoutPlan.getUserList()){
+                if (userId == userFromList.getId()){
+                    workoutPlanListByUser.add(workoutPlan);
+                }
+            }
+        }
+        //entityManager.close();
+        //emFactory.close();
+        return workoutPlanListByUser;
     }
 
     public void addWorkoutPlan(WorkoutPlan workoutPlan) {

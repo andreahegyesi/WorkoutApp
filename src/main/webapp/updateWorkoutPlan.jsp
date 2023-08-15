@@ -37,7 +37,7 @@
                 <a class="nav-link" href="showWgerExercises.jsp">Exercises</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="showMyExercises.jsp">My Exercises</a>
+                <a class="nav-link" aria-current="page" href="showMyExercises.jsp">My Exercises</a>
               </li>
     		  <li class="nav-item">
                 <a class="nav-link" href="showMyWorkouts.jsp">Workouts</a>
@@ -83,13 +83,13 @@
                     <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                         <a  href=<%= "viewCustomExercise.jsp?id=" + exerciseItemRepo.findExerciseItemById(exerciseItemId).getCustomExercise().getId()%>>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                            <button type="button" class="btn btn-sm btn-outline-primary">View</button>
                         </a>
                         <a  href=<%= "deleteExerciseItemFromWorkoutPlan.jsp?id=" + exerciseItemRepo.findExerciseItemById(exerciseItemId).getId() + "&wid=" + workoutPlan.getId()%>>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Remove from Workout Plan</button>
+                            <button type="button" class="btn btn-sm btn-outline-danger">Remove from Workout Plan</button>
                         </a>
                     </div>
-                    <small class="text-body-secondary">id=<%=exerciseItemRepo.findExerciseItemById(exerciseItemId).getId() %></small>
+                    <small class="text-body-secondary"><%=exerciseItemRepo.findExerciseItemById(exerciseItemId).getId() %></small>
                     </div>
                        </div>
                           </div>

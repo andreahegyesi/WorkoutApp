@@ -25,6 +25,10 @@ public class CustomExercise {
     private ArrayList<Integer> secondaryMuscles;
     private ArrayList<Integer> equipment;
     private String imageSource;
+    @ManyToMany(fetch = FetchType.LAZY)
+    private List<User> userList;
+
+
 
     public CustomExercise() {
     }
@@ -48,5 +52,16 @@ public class CustomExercise {
         this.secondaryMuscles = secondaryMuscles;
         this.equipment = equipment;
         this.imageSource = imageSource;
+    }
+
+    public CustomExercise(String name, Category category, String description, ArrayList<Integer> muscles, ArrayList<Integer> secondaryMuscles, ArrayList<Integer> equipment, String imageSource, List<User> userList) {
+        this.name = name;
+        this.category = category;
+        this.description = description;
+        this.muscles = muscles;
+        this.secondaryMuscles = secondaryMuscles;
+        this.equipment = equipment;
+        this.imageSource = imageSource;
+        this.userList = userList;
     }
 }

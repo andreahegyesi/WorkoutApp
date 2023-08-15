@@ -3,6 +3,7 @@
 <%@ page import="com.repository.JpaWgerExerciseRepository" %>
 <%@ page import="com.repository.WgerApiReader" %>
 <%@ page import="com.model.WgerExercise" %>
+<%@ page import="com.model.CustomExercise" %>
 <html>
  <head>
      <meta charset="utf-8">
@@ -37,10 +38,24 @@
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">More</a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">About</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><a class="dropdown-item" href="showUsers.jsp">List of users</a></li>
+                  <li><a class="dropdown-item" href="showExercises.jsp">List of exercises</a></li>
+                  <li><a class="dropdown-item" href="about.jsp">About</a></li>
                 </ul>
               </li>
+                            <% String user = "";
+                            if (request.getSession().getAttribute("user_id") != null) {
+                                   user = request.getSession().getAttribute("user").toString();   %>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="logout.jsp">Logout</a>
+                                </li> <% } %>
+                          </ul>
+                        </div>
+
+                                     <span class="badge badge-secondary">
+                                          <%= user %>
+                                        </span>
+                      </div>
             </ul>
           </div>
         </div>
@@ -72,10 +87,10 @@
                                         <div class="d-flex justify-content-between align-items-center">
                                           <div class="btn-group">
                                             <a  href=<%= "viewWgerExercise.jsp?id=" + exercise.getId() %>>
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                                <button type="button" class="btn btn-sm btn-outline-primary">View</button>
                                             </a>
                                             <a  href=<%= "addExerciseToMyExercises.jsp?id=" + exercise.getId() %>>
-                                            <button type="submit" class="btn btn-sm btn-outline-secondary">Add to My Exercises</button>
+                                            <button type="submit" class="btn btn-sm btn-outline-success">Add to My Exercises</button>
                                             </a>
 
                                           </div>

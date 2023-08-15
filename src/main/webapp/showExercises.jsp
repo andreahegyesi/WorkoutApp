@@ -44,7 +44,28 @@
       </nav>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <h1>List of exercises</h1>
-    <table border="1">
+
+            <%
+
+            HttpSession mySession = request.getSession();
+                        mySession.setAttribute("username", "andrea");
+                        mySession.setAttribute("roles", "role1");
+
+            Enumeration<String> attributes = request.getSession().getAttributeNames();
+               while (attributes.hasMoreElements()) {
+                   String attribute = (String) attributes.nextElement();
+                   System.out.println(attribute+" : " + request.getSession().getAttribute(attribute));
+               }
+
+                System.out.println(mySession.getId());
+
+               session.invalidate();
+               %>
+
+
+
+
+    <table class="table">
         <tr>
             <th>ID</th>
             <th>Name</th>

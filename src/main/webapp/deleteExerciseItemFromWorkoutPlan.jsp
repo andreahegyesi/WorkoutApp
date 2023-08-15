@@ -7,7 +7,7 @@
 <% String id = request.getParameter("id");
    String wid = request.getParameter("wid");
    JpaWorkoutPlanRepository workoutPlanRepo = new JpaWorkoutPlanRepository();
-   workoutPlanRepo.deleteExerciseItemFromWorkoutPlan(3, Integer.parseInt(id));
+   workoutPlanRepo.deleteExerciseItemFromWorkoutPlan(Integer.parseInt(wid), Integer.parseInt(id));
 
    JpaExerciseItemRepository exerciseItemRepo = new JpaExerciseItemRepository();
    exerciseItemRepo.deleteExerciseItem(Integer.parseInt(id));

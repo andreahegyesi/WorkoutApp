@@ -24,5 +24,6 @@ public class AddExerciseServlet extends HttpServlet {
         System.out.println("Button clicked! Java code executed.");
 
         getServletContext().getRequestDispatcher("/showWgerExercises.jsp").forward(req, resp);
+        //req.getSession().getat
     }
 }

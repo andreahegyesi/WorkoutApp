@@ -1,7 +1,7 @@
 package com.repository;
-
 import com.model.CustomExercise;
 import com.model.Category;
+import com.model.User;
 import com.model.Muscle;
 import com.model.Equipment;
 import jakarta.persistence.*;
@@ -19,6 +19,23 @@ public class JpaCustomExerciseRepository {
         //emFactory.close();
         return customExerciseList;
     }
+
+    public List<CustomExercise> getCustomExercisesByUser(int userId) {
+        TypedQuery<CustomExercise> typedQuery = entityManager.createQuery("select c from CustomExercise c", CustomExercise.class);
+        List<CustomExercise> customExerciseList = typedQuery.getResultList();
+        List<CustomExercise> customExerciseListByUser = new ArrayList<>();
+        for (CustomExercise customExercise: customExerciseList){
+            for(User userFromList: customExercise.getUserList()){
+                if (userId == userFromList.getId()){
+                    customExerciseListByUser.add(customExercise);
+                }
+            }
+        }
+        //entityManager.close();
+        //emFactory.close();
+        return customExerciseListByUser;
+    }
+
 
     public void addCustomExercise(CustomExercise customExercise) {
         entityManager.getTransaction().begin();
@@ -45,7 +62,7 @@ public class JpaCustomExerciseRepository {
         return customExercise;
     }
 
-    public void updateCustomExercise(int id,String name, Category category, String description, ArrayList<Integer> muscles, ArrayList<Integer> secondaryMuscles, ArrayList<Integer> equipment){
+    public void updateCustomExercise(int id,String name, Category category, String description, ArrayList<Integer> muscles, ArrayList<Integer> secondaryMuscles, ArrayList<Integer> equipment, String imageSource, List<User> userList){
         entityManager.getTransaction( ).begin( );
         CustomExercise customExercise = entityManager.find(CustomExercise.class, id);
         customExercise.setName(name);
@@ -54,6 +71,8 @@ public class JpaCustomExerciseRepository {
         customExercise.setMuscles(muscles);
         customExercise.setSecondaryMuscles(secondaryMuscles);
         customExercise.setEquipment(equipment);
+        customExercise.setImageSource(imageSource);
+        customExercise.setUserList(userList);
         entityManager.getTransaction( ).commit( );
     }
 

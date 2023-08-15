@@ -1,18 +1,14 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="java.util.*" %>
-<%@ page import="com.repository.JpaWorkoutPlanRepository" %>
-<%@ page import="com.model.WorkoutPlan" %>
 
 <html>
-<head>
+ <head>
      <meta charset="utf-8">
      <meta name="viewport" content="width=device-width, initial-scale=1">
      <title>Workout Application</title>
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
   </head>
 <body>
-
-<nav class="navbar navbar-expand-sm navbar-dark bg-primary" aria-label="Third navbar example">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-primary" aria-label="Third navbar example">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">
              <img src="/WorkoutApp/images/dumbbell.svg" alt="Bootstrap" width="30" height="24"> Workout App</a>
@@ -33,7 +29,7 @@
                 <a class="nav-link" aria-current="page" href="showMyExercises.jsp">My Exercises</a>
               </li>
     		  <li class="nav-item">
-                <a class="nav-link" href="showMyWorkouts.jsp">Workouts</a>
+                <a class="nav-link active" href="showMyWorkouts.jsp">Workouts</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">More</a>
@@ -48,18 +44,19 @@
         </div>
       </nav>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-<div class="container-fluid">
-  <h1>Create your own workout plan!</h1>
-  <form action="createWorkoutPlan.jsp">
-    <div class="form-group w-50 " >
-      <label for="exampleFormControlInput1">Name</label>
-      <input type="text" class="form-control" name = "name" id="exampleFormControlInput1" placeholder="Workout plan name">
-    </div>
+
       <br>
-       <button type="submit" class="btn btn-primary">Create workout plan</button>
-  </form>
-</div>
+      <img class="mb-4" src="/WorkoutApp/images/dumbbell.svg" alt="" width="72" height="72">
 
-
-  </body>
-  </html>
+       <main>
+          <h1 class="text-body-emphasis"Thank you for using WorkoutApp</h1>
+          <p class="fs-5 col-md-8"> WorkoutApp is a flexible fitness manager with a complete list of available exercises. You can choose from a variety of exercises and you can even create your own exercises. From these two, you can create multiple workout plans.</p>
+        </main>
+      <h3>Thank you for using WorkoutApp!</h3>
+      <br/>
+      <br/>
+               <form action="index.jsp">
+                   <input type="submit" value="Back to home page"/>
+               </form>
+      </body>
+      </html>

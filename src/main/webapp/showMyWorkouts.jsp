@@ -40,29 +40,37 @@
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">More</a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">About</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><a class="dropdown-item" href="showUsers.jsp">List of users</a></li>
+                  <li><a class="dropdown-item" href="showExercises.jsp">List of exercises</a></li>
+                  <li><a class="dropdown-item" href="about.jsp">About</a></li>
                 </ul>
               </li>
+             <% String user = "";
+              if (request.getSession().getAttribute("user_id") != null) {
+                     user = request.getSession().getAttribute("user").toString();   %>
+                  <li class="nav-item">
+                      <a class="nav-link" href="logout.jsp">Logout</a>
+                  </li> <% } %>
             </ul>
+          </div>
+           <a  href=<%= "createNewWorkoutPlan.jsp" %>>
+                     <button type="button" class="btn btn-success align-items-right"> Create new workout plan</button>
+                  </a>
+
+                       <span class="badge badge-secondary">
+                            <%= user %>
+                          </span>
           </div>
         </div>
       </nav>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
-    <h1>Create your own workout plans!</h1>
+<div class="container-fluid">
+    <h1>Your workout plans</h1>
 
-     <form action="createNewWorkoutPlan.jsp">
-         <div class="form-outline mb-4">
-     <br/>
-     <input type="submit" value="Create new workout plan" class="btn btn-primary btn-block"/>
-     </form>
-
-<br>
-<br>
 <% JpaWorkoutPlanRepository workoutPlanRepo = new JpaWorkoutPlanRepository();
-      List<WorkoutPlan> workoutplans = workoutPlanRepo.getAllWorkoutPlans();
-       if(workoutplans != null){
+      List<WorkoutPlan> workoutplans = workoutPlanRepo.getWorkoutPlanByUser(Integer.parseInt(request.getSession().getAttribute("user_id").toString()));
+       if (!workoutplans.isEmpty()){
                for (WorkoutPlan workoutPlan : workoutplans) { %>
 <div class="card" style="width: 18rem;">
   <div class="card-body">
@@ -74,14 +82,16 @@
                             exerciseItemRepo.findExerciseItemById(exerciseItemId).getSet() + "x" +
                             exerciseItemRepo.findExerciseItemById(exerciseItemId).getRepetition()%></p>
      <%}%>
-    <a href=<%="updateWorkoutPlan.jsp?id=" + workoutPlan.getId() %> class="btn btn-sm btn-outline-secondary">View&Update</a>
-    <a href=<%="deleteWorkoutPlan.jsp?id=" + workoutPlan.getId() %> class="btn btn-sm btn-outline-secondary">Delete</a>
+    <a href=<%="updateWorkoutPlan.jsp?id=" + workoutPlan.getId() %> class="btn btn-sm btn-outline-primary">View&Update</a>
+    <a href=<%="deleteWorkoutPlan.jsp?id=" + workoutPlan.getId() %> class="btn btn-sm btn-outline-danger">Delete</a>
   </div>
 </div>
+<br>
         <%}
         }else{%>
               <p> No workout plans </p>
            <%}%>
+</div>
 </body>
 </html>
 

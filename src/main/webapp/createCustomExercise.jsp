@@ -1,7 +1,9 @@
 <%@ page import="com.model.Category" %>
 <%@ page import="com.model.Muscle" %>
 <%@ page import="com.model.CustomExercise" %>
+<%@ page import="com.model.User" %>
 <%@ page import="com.repository.JpaCategoryRepository" %>
+<%@ page import="com.repository.JpaUserRepository" %>
 <%@ page import="com.repository.JpaMuscleRepository" %>
 <%@ page import="com.repository.JpaCustomExerciseRepository" %>
 <%@ page import="java.util.*" %>
@@ -30,9 +32,15 @@
           .map(Integer::parseInt)
           .collect(Collectors.toCollection(ArrayList::new));
 
-  CustomExercise customExercise = new CustomExercise(name,category,description,muscleArrayList,secondaryMuscleArrayList,equipmentArrayList, "UNDEFINED");
+  String imageSource = request.getParameter("imagesource");
+
+   JpaUserRepository userRepo = new JpaUserRepository();
+   List <User> userList = new ArrayList<>();
+   userList.add(userRepo.findUserById(Integer.parseInt(request.getSession().getAttribute("user_id").toString())));
+
+  CustomExercise customExercise = new CustomExercise(name,category,description,muscleArrayList,secondaryMuscleArrayList,equipmentArrayList, imageSource, userList);
   JpaCustomExerciseRepository customExerciseRepo = new JpaCustomExerciseRepository();
   customExerciseRepo.addCustomExercise(customExercise);
 %>
 
-  <meta http-equiv="Refresh" content="0; url='/WorkoutApp/createNewExercise.jsp" />
+  <meta http-equiv="Refresh" content="0; url='/WorkoutApp/showMyExercises.jsp" />

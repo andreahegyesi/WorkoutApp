@@ -42,8 +42,9 @@
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">More</a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">About</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                       <li><a class="dropdown-item" href="showUsers.jsp">List of users</a></li>
+                       <li><a class="dropdown-item" href="showExercises.jsp">List of exercises</a></li>
+                       <li><a class="dropdown-item" href="about.jsp">About</a></li>
                 </ul>
               </li>
             </ul>
@@ -51,36 +52,43 @@
         </div>
       </nav>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<div class="container-fluid">
+        <h1>Choose workout plan. Add number of sets and repetitions.</h1>
+        <%
+        String id = request.getParameter("id");
+        String user = "";
+                       Integer userId = 0;
+                    if (request.getSession().getAttribute("user_id") != null) {
+                           user = request.getSession().getAttribute("user").toString();
+                           userId = Integer.parseInt(request.getSession().getAttribute("user_id").toString()); }
+        %>
+        <form action="addCustomExerciseToWorkoutPlan.jsp">
 
-<h1>Choose workout plan. Add number of sets and repetitions.</h1>
-<% String id = request.getParameter("id"); %>
-<form action="addCustomExerciseToWorkoutPlan.jsp">
+          <input type="hidden" class="form-control" name="id" value=<%=id%> >
+          <div class="form-group w-50">
+            <label for="exampleFormControlSelect1">Workout Plan</label>
+            <select class="form-control" name = "workoutplanId" id="exampleFormControlSelect1">
+               <% JpaWorkoutPlanRepository workoutPlanRepo = new JpaWorkoutPlanRepository();
+               List<WorkoutPlan> workoutPlans = workoutPlanRepo.getWorkoutPlanByUser(userId);
+               for (WorkoutPlan workoutPlan : workoutPlans) { %>
+                    <option value=<%=workoutPlan.getId()%> >  <%=workoutPlan.getName() %>  </option>
+                <%}%>
+            </select>
+          </div>
 
-  <input type="hidden" class="form-control" name="id" value=<%=id%> >
-  <div class="form-group w-50">
-    <label for="exampleFormControlSelect1">Workout Plan</label>
-    <select class="form-control" name = "workoutplan" id="exampleFormControlSelect1">
-       <% JpaWorkoutPlanRepository workoutplanRepo = new JpaWorkoutPlanRepository();
-       List<WorkoutPlan> workoutPlans = workoutplanRepo.getAllWorkoutPlans();
-       for (WorkoutPlan workoutPlan : workoutPlans) { %>
-            <option><%=workoutPlan.getName() %></option>
-        <%}%>
-    </select>
-  </div>
+            <div class="form-group w-50"">
+              <label for="exampleFormControlTextarea1">Set</label>
+              <input type="number"textarea class="form-control" name="set" id="exampleFormControlTextarea1" rows="1"></textarea>
+            </div>
 
-    <div class="form-group w-50"">
-      <label for="exampleFormControlTextarea1">Set</label>
-      <input type="number"textarea class="form-control" name="set" id="exampleFormControlTextarea1" rows="1"></textarea>
-    </div>
+            <div class="form-group w-50"">
+              <label for="exampleFormControlTextarea1">Repetition</label>
+              <input type="number" textarea class="form-control" name="repetition" id="exampleFormControlTextarea1" rows="1"></textarea>
+            </div>
 
-    <div class="form-group w-50"">
-      <label for="exampleFormControlTextarea1">Repetition</label>
-      <input type="number" textarea class="form-control" name="repetition" id="exampleFormControlTextarea1" rows="1"></textarea>
-    </div>
-
-  <br>
-   <button type="submit" class="btn btn-primary">Add to my workout plan</button>
-</form>
-
+          <br>
+           <button type="submit" class="btn btn-primary">Add to my workout plan</button>
+        </form>
+</div>
 </body>
 </html>

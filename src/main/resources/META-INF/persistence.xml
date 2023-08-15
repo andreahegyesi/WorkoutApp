@@ -14,6 +14,7 @@
         <class>com.model.CustomExercise</class>
         <class>com.model.WorkoutPlan</class>
         <class>com.model.ExerciseItem</class>
+        <class>com.model.User</class>
 
         <properties>
 

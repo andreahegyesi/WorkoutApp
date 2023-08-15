@@ -45,42 +45,23 @@
                   <li><a class="dropdown-item" href="about.jsp">About</a></li>
                 </ul>
               </li>
-            <% String user = "";
-               Integer userId = 0;
-            if (request.getSession().getAttribute("user_id") != null) {
-                   user = request.getSession().getAttribute("user").toString();
-                   userId = Integer.parseInt(request.getSession().getAttribute("user_id").toString()); %>
-                <li class="nav-item">
-                    <a class="nav-link" href="logout.jsp">Logout</a>
-                </li>
-                <% } else response.sendRedirect("index.jsp");
-                %>
 
-          </ul>
-        </div>
-        <a  href=<%= "createNewExercise.jsp" %>>
-           <button type="button" class="btn btn-success align-items-right"> Create new exercise</button>
-        </a>
-         <span class="badge badge-secondary">
-              <%= user %>
-            </span>
-      </div>
+            </ul>
           </div>
-
+          <a  href=<%= "createNewExercise.jsp" %>>
+          <button type="button" class="btn btn-success align-items-right"> Create new exercise</button>
+            </a>
         </div>
-
 
       </nav>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
 
 <div class="album py-5 bg-body-tertiary">
-
     <div class="container">
-
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             <% JpaCustomExerciseRepository repository = new JpaCustomExerciseRepository();
-            List<CustomExercise> customExercises = repository.getCustomExercisesByUser(userId);
+            List<CustomExercise> customExercises = repository.getAllCustomExercises();
             if(customExercises != null){
                 for (CustomExercise customExercise: customExercises) { %>
                     <div class="col">
@@ -88,30 +69,31 @@
                     <%if (customExercise.getImageSource().equals("UNDEFINED")){%>
                     <img class="card-img-top" src ="/WorkoutApp/images/no-image.svg" alt="Image placeholder" style="object-fit:cover; width:360px; height:300px;">
                     <%}else{%>
-                    <img class="card-img-top"  src=<%='"'+ customExercise.getImageSource() + '"' %> alt="Image placeholder" style="object-fit:contain; width:360px; height:300px;">
+                    <img class="card-img-top"  src=<%= customExercise.getImageSource() %> alt="Image placeholder" style="object-fit:contain; width:360px; height:300px;">
                     <%}%>
                     <div class="card-body">
                         <h5 class="card-title"><%= customExercise.getName() %></h5>
                         <div class="d-flex gap-2 py-2">
-                        <span class="badge text-bg-info rounded-pill"><p class="card-text"><%= customExercise.getCategory().getName() %></p></span>
+                        <span class="badge text-bg-primary rounded-pill"><p class="card-text"><%= customExercise.getCategory().getName() %></p></span>
                     </div>
                     <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                         <a  href=<%= "viewCustomExercise.jsp?id=" + customExercise.getId()%>>
-                            <button type="button" class="btn btn-sm btn-outline-primary">View</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
                         </a>
                         <a  href=<%= "updateCustomExercise.jsp?id=" + customExercise.getId() %>>
-                            <button type="button" class="btn btn-sm btn-outline-primary">Update</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Update</button>
                         </a>
                         <a  href=<%= "deleteCustomExercise.jsp?id=" + customExercise.getId() %>>
-                            <button type="button" class="btn btn-sm btn-outline-danger">Delete</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
                         </a>
                         <a  href=<%= "createExerciseItem.jsp?id=" + customExercise.getId() %>>
-                            <button type="button" class="btn btn-sm btn-outline-success">Add to Workout</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Add to Workout</button>
                         </a>
 
+
                     </div>
-                    <small class="text-body-secondary"><%=customExercise.getId() %></small>
+                    <small class="text-body-secondary">id=<%=customExercise.getId() %></small>
                     </div>
                        </div>
                           </div>

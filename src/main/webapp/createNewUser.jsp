@@ -1,8 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="java.util.*" %>
-<%@ page import="com.repository.JpaWgerExerciseRepository" %>
-<%@ page import="com.repository.WgerApiReader" %>
-<%@ page import="com.model.WgerExercise" %>
+<%@ page import="com.model.User" %>
 <html>
 
  <head>
@@ -38,49 +36,36 @@
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">More</a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="showUsers.jsp">List of users</a></li>
-                  <li><a class="dropdown-item" href="showExercises.jsp">List of exercises</a></li>
-                  <li><a class="dropdown-item" href="about.jsp">About</a></li>
+                  <li><a class="dropdown-item" href="#">About</a></li>
+                  <li><a class="dropdown-item" href="showExercises.jsp">WGER exercises table wiew</a></li>
                 </ul>
               </li>
-              <% String user = "";
-              if (request.getSession().getAttribute("user_id") != null) {
-                     user = request.getSession().getAttribute("user").toString();   %>
-                  <li class="nav-item">
-                      <a class="nav-link" href="logout.jsp">Logout</a>
-                  </li> <% } %>
             </ul>
           </div>
-
-                       <span class="badge badge-secondary">
-                            <%= user %>
-                          </span>
         </div>
       </nav>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
       <script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
-   <main class="form-signin w-50 m-auto">
-    <h1 class="h3 mb-3 fw-normal text-center" ><br>Welcome back!</h1>
-    <img class="mb-4" src="/WorkoutApp/images/dumbbell.svg" alt="" width="72" height="72">
-     <form action="login" method="post">
+   <main class="w-50 m-auto">
+   <h1 class="h3 mb-3 fw-normal text-center" ><br>Create new account!</h1>
+     <form action="createUser.jsp">
+        <div class="form-floating">
+          <input type="text" class="form-control" name="name" id="floatingInput" placeholder="name" required>
+          <label for="floatingInput">Name</label>
+        </div>
        <div class="form-floating">
-         <input type="text" class="form-control" name="email" id="floatingInput" placeholder="name@example.com" required>
+         <input type="email" class="form-control" name="email" id="floatingInput" placeholder="name@example.com" required>
          <label for="floatingInput">Email address</label>
        </div>
        <div class="form-floating">
          <input type="password" class="form-control" name="password" id="floatingPassword" placeholder="Password" required><br>
          <label for="floatingPassword">Password</label>
        </div>
-       <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
+       <button class="btn btn-success w-100 py-2" type="submit">Sign up</button>
      </form>
-
-     <a  href= "createNewUser.jsp">
-         <button class="btn btn-success w-100 py-2" type="submit">Create new account</button>
-     </a>
-
-      <p class="mt-5 mb-3 text-body-secondary">&copy; 2023 Hegyesi Andrea</p>
    </main>
 </body>
 </html>
+
 

@@ -17,7 +17,7 @@
    CustomExercise customExercise = customRepository.findCustomExerciseById(Integer.parseInt(id));
 
    JpaWorkoutPlanRepository workoutPlanRepo = new JpaWorkoutPlanRepository();
-   int workoutPlanId = workoutPlanRepo.findWorkoutPlanIdByName(request.getParameter("workoutplan"));
+   int workoutPlanId = Integer.parseInt(request.getParameter("workoutplanId"));
 
    int set = Integer.parseInt(request.getParameter("set"));
    int repetition = Integer.parseInt(request.getParameter("repetition"));
@@ -29,5 +29,5 @@
 
    workoutPlanRepo.addExerciseItemToWorkoutPlan(workoutPlanId,exerciseItem.getId());
 
-   response.sendRedirect("showMyExercises.jsp");
+   response.sendRedirect("showMyWorkouts.jsp");
    %>

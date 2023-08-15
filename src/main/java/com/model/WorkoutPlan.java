@@ -1,5 +1,6 @@
 package com.model;
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -17,6 +18,8 @@ public class WorkoutPlan {
     private String name;
 
     private List<Integer> exerciseItems;
+    @ManyToMany(fetch = FetchType.LAZY)
+    private List<User> userList;
 
     public WorkoutPlan(){
 
@@ -40,5 +43,11 @@ public class WorkoutPlan {
         this.id = id;
         this.name = name;
         this.exerciseItems = exerciseItems;
+    }
+
+    public WorkoutPlan(String name, List<Integer> exerciseItems, List<User> userList) {
+        this.name = name;
+        this.exerciseItems = exerciseItems;
+        this.userList = userList;
     }
 }
